@@ -14,25 +14,15 @@ const opencage = require('opencage-api-client');
 
 function getAddressPosition(address) {
     const requestObj = {
-        key: '1315122032774d06b34c570f3bd70f7b',
+        key: 'e1b9292e6840458fb3d45a8d8e34c051',
         q: address
     };
 
     return opencage.geocode(requestObj)
         .then(data => {
-            // if (data.status.code == 200) {
-                // if (data.results.length > 0) {
-                    const place = data.results[0];
-                    // console.log(place.geometry);
-                    return place;
-                // }
-            // } else {
-            //     // other possible response codes:
-            //     // https://opencagedata.com/api#codes
-            //     console.log('error', data.status.message);
-            // }
+            const place = data.results[0];
+            return place.geometry;
         })
-        .catch(error => console.log('error', error.message));
 }
 
-console.log(getAddressPosition('1455 Boulevard de Maisonneuve O, Montréal, QC H3G 1M8'));
+getAddressPosition('1453 Boulevard de Maisonneuve O, Montréal, QC H3G 1M8').then(value => console.log(value));
